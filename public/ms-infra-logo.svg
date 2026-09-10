@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 250" role="img" aria-labelledby="title desc">
+  <title id="title">MS Infra</title>
+  <desc id="desc">MS Infra real estate logo</desc>
+  <g fill="none" stroke="#0d1919" stroke-width="10" stroke-linejoin="round">
+    <path d="M18 181 155 142l139 39v35l-139-39-137 39z" fill="#0d1919" stroke="none"/>
+    <path d="M18 126 155 87l139 39v35l-139-39-137 39z" fill="#0d1919" stroke="none"/>
+    <path d="M18 72 155 33l139 39v35l-139-39-137 39z" fill="#0d1919" stroke="none"/>
+    <path d="M18 211h76v25H18z" fill="#0d1919" stroke="none"/>
+  </g>
+  <text x="345" y="112" fill="#0d1919" font-family="Arial, Helvetica, sans-serif" font-size="94" font-weight="800" letter-spacing="3">MS</text>
+  <text x="345" y="207" fill="#0d1919" font-family="Arial, Helvetica, sans-serif" font-size="94" font-weight="800" letter-spacing="-2">INFRA</text>
+</svg>

@@ -1,0 +1,133 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model AdminUser {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  name         String
+  passwordHash String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model Project {
+  id               String                  @id @default(cuid())
+  name             String
+  slug             String                  @unique
+  status           String
+  type             String
+  area             String?
+  city             String?
+  state            String?
+  shortDescription String
+  fullDescription  String
+  cardDescription  String?
+  propertyOverview  String?
+  location         String
+  address          String
+  priceFrom        String?
+  priceTo          String?
+  priceUnit        String?
+  priceRange       String?
+  possession       String?
+  developer        String?
+  totalUnits       Int?
+  numberOfBuildings Int?
+  numberOfFloors    Int?
+  areaConfigurations String?
+  featured         Boolean                 @default(false)
+  seoTitle         String?
+  seoDescription   String?
+  displayOrder     Int                     @default(0)
+  published        Boolean                 @default(true)
+  mainImage        String?
+  brochureUrl      String?
+  createdAt        DateTime                @default(now())
+  updatedAt        DateTime                @updatedAt
+  amenities        ProjectAmenity[]
+  highlights       ProjectHighlight[]
+  locationBenefits ProjectLocationBenefit[]
+  nearbyLandmarks  ProjectNearbyLandmark[]
+  floorPlans       ProjectFloorPlan[]
+  images           ProjectImage[]
+  enquiries        Enquiry[]
+}
+
+model ProjectAmenity {
+  id        String   @id @default(cuid())
+  projectId String
+  name      String
+  createdAt DateTime @default(now())
+  project   Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+}
+
+model ProjectHighlight {
+  id        String   @id @default(cuid())
+  projectId String
+  text      String
+  createdAt DateTime @default(now())
+  project   Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+}
+
+model ProjectLocationBenefit {
+  id        String   @id @default(cuid())
+  projectId String
+  title     String
+  createdAt DateTime @default(now())
+  project   Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+}
+
+model ProjectNearbyLandmark {
+  id        String   @id @default(cuid())
+  projectId String
+  name      String
+  distance  String
+  createdAt DateTime @default(now())
+  project   Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+}
+
+model ProjectFloorPlan {
+  id        String   @id @default(cuid())
+  projectId String
+  title     String
+  imageUrl  String?
+  area      String?
+  bedrooms  String?
+  price     String?
+  createdAt DateTime @default(now())
+  project   Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+}
+
+model ProjectImage {
+  id        String   @id @default(cuid())
+  projectId String
+  kind      String
+  url       String
+  altText   String?
+  isCover   Boolean  @default(false)
+  createdAt DateTime @default(now())
+  project   Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+}
+
+model Enquiry {
+  id                    String    @id @default(cuid())
+  fullName              String
+  mobile                String
+  email                 String?
+  interestedProject     String?
+  projectId             String?
+  preferredContactMethod String?
+  message               String?
+  status                String    @default("New")
+  notes                 String?
+  source                String?
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+  project               Project?  @relation(fields: [projectId], references: [id], onDelete: SetNull)
+}
